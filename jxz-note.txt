@@ -1,0 +1,25 @@
+#  cmake -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/data/code/github/mysql-dep -G "CodeBlocks - Unix Makefiles" /data/code/github/mysql-server
+
+
+
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/data/debug/mysql5/install -DMYSQL_DATADIR=/data/debug/mysql5/data -DSYSCONFDIR=/data/debug/mysql5/etc -DMYSQL_UNIX_ADDR=/data/debug/mysql5/mysql.sock -DWITH_DEBUG=1 -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/data/code/github/mysql5-dep -DDOWNLOAD_BOOST_TIMEOUT=60000 -G "CodeBlocks - Unix Makefiles" /data/code/github/mysql-server5
+
+
+make -j 4
+
+make install -j 4
+
+# init data
+./mysqld --initialize-insecure --user=root --datadir=/data/debug/mysql5/data
+
+# startup
+./mysqld --defaults-file=/data/debug/mysql5/etc/my.cnf
+
+
+＃ debug config
+-DCMAKE_INSTALL_PREFIX=/data/debug/mysql5/install
+-DMYSQL_DATADIR=/data/debug/mysql5/data
+-DSYSCONFDIR=/data/debug/mysql5/etc
+-DMYSQL_UNIX_ADDR=/data/debug/mysql5/mysql.sock
+-DWITH_DEBUG=1
+-DWITH_BOOST=/data/code/github/mysql5-dep
